@@ -22,7 +22,7 @@ main_Cd = 2.2;
 payload_Cd = 2.2;
 
 % Rocket
-Rocket_W = 55; % rocket weight (lbs)
+Rocket_W = 49; % rocket weight (lbs)
 Payload_W = 6; % payload weight (lbs)
 
 % Deployment
@@ -53,18 +53,16 @@ q_drogue = 0.5*rho_drogue(end)*v_drogue^2; % dynamic pressure for drogue
 q_payload = 0.5*rho_payload(end)*v_payload^2; % dynamic pressure for payload
 
 %%% Determine final parachute diameters
-Rocket_W = convforce(Rocket_W,'lbf','N');
+Rocket_Drogue = convforce((Rocket_W+Payload_W),'lbf','N');
 Payload_W = convforce(Payload_W, 'lbf', 'N');
-D_drogue = sqrt((4*Rocket_W)/(q_drogue*drogue_Cd*pi)); % determine drogue shoot diameter
-D_payload = sqrt((4*Payload_W)/(q_payload*payload_Cd*pi)); % determine drogue shoot diameter
-
-
+D_drogue = sqrt((4*Rocket_Drogue)/(q_drogue*drogue_Cd*pi)); % determine drogue shoot diameter
+D_payload = sqrt((4*Payload_W)/(q_payload*payload_Cd*pi)); % determine payload shoot diameter
+D_main = sqrt((4*Rocket_W)/(q_payload*payload_Cd*pi)); % determine main shoot diameter
 
 %% Print Statement
-% disp('Drogue Size: ', convlength(D_drogue,'m','ft'))
-% disp('Drogue Size: ', convlength(D_payload,'m','ft'))
-
-
+fprintf("The maximium drogue diameter is %1.2f (m) or %1.2f (ft)\n",D_drogue, convlength(D_drogue,'m','ft'));
+fprintf("The maximium payload parachute diameter is %1.2f (m) or %1.2f (ft)\n",D_payload, convlength(D_payload,'m','ft'));
+fprintf("The maximium main parachute diameter is %1.2f (m) or %1.2f (ft)\n",D_main, convlength(D_main,'m','ft'));
 %% Remove Paths
 rmpath("Complete 1976 Standard Atmosphere\")
 disp('File Path Removed')
