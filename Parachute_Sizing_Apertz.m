@@ -22,8 +22,8 @@ main_Cd = 2.2;
 payload_Cd = 2.2;
 
 % Rocket
-Rocket_W = 49; % rocket weight (lbs)
-Payload_W = 6; % payload weight (lbs)
+Rocket_W = 65; % rocket weight (lbs)
+Payload_W = 12; % payload weight (lbs)
 
 % Deployment
 Launch_alt = 4600; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report
@@ -53,11 +53,11 @@ q_drogue = 0.5*rho_drogue(end)*v_drogue^2; % dynamic pressure for drogue
 q_payload = 0.5*rho_payload(end)*v_payload^2; % dynamic pressure for payload
 
 %%% Determine final parachute diameters
-Rocket_Drogue = convforce((Rocket_W+Payload_W),'lbf','N');
+Rocket_Drogue = convforce(Rocket_W,'lbf','N');
 Payload_W = convforce(Payload_W, 'lbf', 'N');
 D_drogue = sqrt((4*Rocket_Drogue)/(q_drogue*drogue_Cd*pi)); % determine drogue shoot diameter
 D_payload = sqrt((4*Payload_W)/(q_payload*payload_Cd*pi)); % determine payload shoot diameter
-D_main = sqrt((4*Rocket_W)/(q_payload*payload_Cd*pi)); % determine main shoot diameter
+D_main = sqrt((4*(Rocket_Drogue-Payload_W))/(q_payload*payload_Cd*pi)); % determine main shoot diameter
 
 %% Print Statement
 fprintf("The maximium drogue diameter is %1.2f (m) or %1.2f (ft)\n",D_drogue, convlength(D_drogue,'m','ft'));
