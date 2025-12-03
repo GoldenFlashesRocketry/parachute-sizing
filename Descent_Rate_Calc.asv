@@ -23,7 +23,7 @@ main_Cd = 2.2;
 payload_Cd = 1.2;
 drogue_D = 3; %ft
 payload_D = 4; %ft
-main_D = 8; %ft
+main_D = 8; %
 % Rocket
 Rocket_W = 60; % rocket weight (lbs)
 Payload_W = 7; % payload weight (lbs)
@@ -50,17 +50,6 @@ rho_payload = rho_payload(end);
 % Solve for Velocity
 Rocket_Drogue = convforce(Rocket_W,'lbf','N');
 Payload_W = convforce(Payload_W, 'lbf', 'N');
-drogue_D = convlength(drogue_D,'ft','m');
-main_D = convlength(main_D,'ft','m');
-payload_D = convlength(payload_D,'ft','m');
-V_Drogue = sqrt((6*Rocket_Drogue)/(drogue_Cd*rho_drogue*pi*drogue_D));
-V_Main = sqrt((6*(Rocket_Drogue-Payload_W))/(main_Cd*rho_payload*pi*main_D));
-v_payload = sqrt((6*Payload_W)/(payload_Cd*rho_payload*pi*payload_D));
-
-%% Print Statement
-fprintf("The descent under drogue is %1.2f (m/s) or %1.2f (ft/s)\n",V_Drogue, convvel(V_Drogue,'m/s','ft/s'));
-fprintf("The descent under main is %1.2f (m/s) or %1.2f (ft/s)\n",V_Main, convvel(V_Main,'m/s','ft/s'));
-fprintf("The descent under payload is %1.2f (m/s) or %1.2f (ft/s)\n",v_payload, convvel(v_payload,'m/s','ft/s'));
-%% Remove Paths
-rmpath("Complete 1976 Standard Atmosphere\")
-disp('File Path Removed')
+V_Drogue = sqrt((6*Rocket_Drogue)/(drogue_Cd*rho_drogue*pi*drogue_D))
+V_Main = sqrt((6*(Rocket_Drogue-Payload_W))/(main_Cd*rho_payload*pi*main_D))
+v_payload = sqrt((6*Payload_W)/(payload_Cd*rho_payload*pi*payload_D))
