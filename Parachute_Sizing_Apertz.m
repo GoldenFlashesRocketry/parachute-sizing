@@ -1,6 +1,6 @@
 %% Parachute Sizing Script - Andrew Pertz
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Program:    1976 Standard Atmosphere Calculator[0-1000 km]
+%   Program:    Parachute Sizing Script
 %   Author:     Andrew Pertz
 %   History:    
 %               
@@ -17,16 +17,16 @@ disp('File Paths Added')
 %% Input Parameters
 
 % Parachutes
-drogue_Cd = 2.2;
+drogue_Cd = 1.55;
 main_Cd = 2.2;
-payload_Cd = 2.2;
+payload_Cd = 1.2;
 
 % Rocket
 Rocket_W = 65; % rocket weight (lbs)
-Payload_W = 12; % payload weight (lbs)
+Payload_W = 7; % payload weight (lbs)
 
 % Deployment
-Launch_alt = 4600; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report
+Launch_alt = 2920;%4600; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report
 Drogue_alt = 10000; % drogue deployment altitude (ft)
 Payload_alt = 1000; % payload deployment altitude (ft) NOTE: Same as main 
 
