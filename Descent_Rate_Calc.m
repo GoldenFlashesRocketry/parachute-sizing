@@ -25,8 +25,8 @@ drogue_D = 3; %ft
 payload_D = 4; %ft
 main_D = 6; %ft
 % Rocket
-Rocket_W = 56.2; % rocket weight (lbs)
-Payload_W = 7; % payload weight (lbs)
+Rocket_W = 50.7; % rocket weight (lbs) (from OpenRocket PR2)
+Payload_W = 7.5; % payload weight (lbs)
 
 % Deployment
 Launch_alt = 2920;%4600; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report
