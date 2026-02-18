@@ -56,9 +56,9 @@ Payload_W = convforce(Payload_W, 'lbf', 'N');
 drogue_D = convlength(drogue_D,'ft','m');
 main_D = convlength(main_D,'ft','m');
 payload_D = convlength(payload_D,'ft','m');
-V_Drogue = sqrt((6*Rocket_Drogue)/(drogue_Cd*rho_drogue*pi*drogue_D));
-V_Main = sqrt((6*(Rocket_Drogue-Payload_W))/(main_Cd*rho_payload*pi*main_D));
-v_payload = sqrt((6*Payload_W)/(payload_Cd*rho_payload*pi*payload_D));
+V_Drogue = sqrt((8*Rocket_Drogue)/(drogue_Cd*rho_drogue*pi*drogue_D^2));
+V_Main = sqrt((8*(Rocket_Drogue-Payload_W))/(main_Cd*rho_payload*pi*main_D^2));
+v_payload = sqrt((8*Payload_W)/(payload_Cd*rho_payload*pi*payload_D^2));
 
 % Snatch Forces on Drogue
 a_avg_drogue = (deployment_v - V_Drogue)/delta_t;
