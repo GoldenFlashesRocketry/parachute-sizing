@@ -23,7 +23,7 @@ main_Cd = 2.2;
 payload_Cd = 1.2;
 drogue_D = 3; %ft
 payload_D = 4; %ft
-main_D = 6; %ft
+main_D = 8; %ft
 % Rocket
 Rocket_W = 50.7; % rocket weight (lbs) (from OpenRocket PR2)
 Payload_W = 7.5; % payload weight (lbs)
@@ -32,6 +32,9 @@ Payload_W = 7.5; % payload weight (lbs)
 Launch_alt = 2920;%4600; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report
 Drogue_alt = 10000; % drogue deployment altitude (ft)
 Payload_alt = 1000; % payload deployment altitude (ft) NOTE: Same as main 
+
+delta_t = 0.1; % inflation time for parachutes
+deployment_v = 23.3; % velocity at drogue deployment, taken from OpenRocket
 
 %% Calculations 
 
@@ -57,10 +60,27 @@ V_Drogue = sqrt((6*Rocket_Drogue)/(drogue_Cd*rho_drogue*pi*drogue_D));
 V_Main = sqrt((6*(Rocket_Drogue-Payload_W))/(main_Cd*rho_payload*pi*main_D));
 v_payload = sqrt((6*Payload_W)/(payload_Cd*rho_payload*pi*payload_D));
 
+% Snatch Forces on Drogue
+a_avg_drogue = (deployment_v - V_Drogue)/delta_t;
+F_avg_drogue = a_avg_drogue*(Rocket_Drogue/9.81)+Rocket_Drogue;
+% Snatch Forces on Main
+Rocket_Main = Rocket_Drogue - Payload_W;
+a_avg_main = (V_Drogue - V_Main)/delta_t;
+F_avg_main = a_avg_main*(Rocket_Main/9.81)+Rocket_Main;
+% Snatch Forces on Payload
+a_avg_payload = (v_payload - 0)/delta_t;
+F_avg_payload = a_avg_payload*(Payload_W/9.81)+Payload_W;
+
 %% Print Statement
+disp("---Descent Rate---")
 fprintf("The descent under drogue is %1.2f (m/s) or %1.2f (ft/s)\n",V_Drogue, convvel(V_Drogue,'m/s','ft/s'));
 fprintf("The descent under main is %1.2f (m/s) or %1.2f (ft/s)\n",V_Main, convvel(V_Main,'m/s','ft/s'));
 fprintf("The descent under payload is %1.2f (m/s) or %1.2f (ft/s)\n",v_payload, convvel(v_payload,'m/s','ft/s'));
+disp("---Snatch Forces---")
+fprintf("The average snatch force for Drogue is %1.2f (N)\n",F_avg_drogue);
+fprintf("The average snatch force for Main is %1.2f (N)\n",F_avg_main);
+fprintf("The average snatch force for Payload is %1.2f (N)\n",F_avg_payload);
+
 %% Remove Paths
 rmpath("Complete 1976 Standard Atmosphere\")
 disp('File Path Removed')
