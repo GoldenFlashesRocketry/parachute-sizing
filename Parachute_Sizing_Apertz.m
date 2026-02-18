@@ -22,7 +22,7 @@ main_Cd = 2.2;
 payload_Cd = 1.2;
 
 % Rocket
-Rocket_W = 65; % rocket weight (lbs)
+Rocket_W = 60; % rocket weight (lbs)
 Payload_W = 7; % payload weight (lbs)
 
 % Deployment
@@ -30,8 +30,8 @@ Launch_alt = 2920;%4600; % altitude of launch site, given from IREC 6.3.2 Testin
 Drogue_alt = 10000; % drogue deployment altitude (ft)
 Payload_alt = 1000; % payload deployment altitude (ft) NOTE: Same as main 
 
-v_drogue = 65; % descent rate of drogue (ft/s)
-v_payload = 25; % descent rate of payload (ft/s)
+v_drogue = 131; % descent rate of drogue (ft/s)
+v_payload = 36; % descent rate of payload (ft/s)
 
 %% Calculations
 
@@ -60,9 +60,9 @@ D_payload = sqrt((4*Payload_W)/(q_payload*payload_Cd*pi)); % determine payload s
 D_main = sqrt((4*(Rocket_Drogue-Payload_W))/(q_payload*payload_Cd*pi)); % determine main shoot diameter
 
 %% Print Statement
-fprintf("The maximium drogue diameter is %1.2f (m) or %1.2f (ft)\n",D_drogue, convlength(D_drogue,'m','ft'));
-fprintf("The maximium payload parachute diameter is %1.2f (m) or %1.2f (ft)\n",D_payload, convlength(D_payload,'m','ft'));
-fprintf("The maximium main parachute diameter is %1.2f (m) or %1.2f (ft)\n",D_main, convlength(D_main,'m','ft'));
+fprintf("The minimum drogue diameter is %1.2f (m) or %1.2f (ft)\n",D_drogue, convlength(D_drogue,'m','ft'));
+fprintf("The minimum payload parachute diameter is %1.2f (m) or %1.2f (ft)\n",D_payload, convlength(D_payload,'m','ft'));
+fprintf("The minimum main parachute diameter is %1.2f (m) or %1.2f (ft)\n",D_main, convlength(D_main,'m','ft'));
 %% Remove Paths
 rmpath("Complete 1976 Standard Atmosphere\")
 disp('File Path Removed')

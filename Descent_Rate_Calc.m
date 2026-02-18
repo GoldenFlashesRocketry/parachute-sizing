@@ -23,9 +23,9 @@ main_Cd = 2.2;
 payload_Cd = 1.2;
 drogue_D = 3; %ft
 payload_D = 4; %ft
-main_D = 8; %ft
+main_D = 6; %ft
 % Rocket
-Rocket_W = 60; % rocket weight (lbs)
+Rocket_W = 56.2; % rocket weight (lbs)
 Payload_W = 7; % payload weight (lbs)
 
 % Deployment
