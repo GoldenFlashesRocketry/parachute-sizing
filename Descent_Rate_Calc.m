@@ -71,6 +71,14 @@ F_avg_main = a_avg_main*(Rocket_Main/9.81)+Rocket_Main;
 a_avg_payload = (v_payload - 0)/delta_t;
 F_avg_payload = a_avg_payload*(Payload_W/9.81)+Payload_W;
 
+% Pressure AGL
+P_AGL = convpres(P_drogue(1),'Pa','psi');
+P_AGL10K = convpres(P_drogue(end),'Pa','psi');
+F = (P_AGL-P_AGL10K)*6; % pressure on nose cone during flight
+Pin_AFT = F/40; % number of shear pins;
+F_FWD = convforce(Payload_W,'N','lbf')*6^2*pi/4;
+Pin_FWD = F_FWD/40; % shear pins for nose cone
+
 %% Print Statement
 disp("---Descent Rate---")
 fprintf("The descent under drogue is %1.2f (m/s) or %1.2f (ft/s)\n",V_Drogue, convvel(V_Drogue,'m/s','ft/s'));
@@ -80,6 +88,9 @@ disp("---Snatch Forces---")
 fprintf("The average snatch force for Drogue is %1.2f (N)\n",F_avg_drogue);
 fprintf("The average snatch force for Main is %1.2f (N)\n",F_avg_main);
 fprintf("The average snatch force for Payload is %1.2f (N)\n",F_avg_payload);
+disp("---Pressure---")
+fprintf("The drag separation is %1.2f (lbs) or %1.2f (N) and %1f pins are needed\n", F, convforce(F, 'lbf', 'N'), Pin_AFT)
+fprintf("The minimum number of shear pins in the forward body tube is %1f\n",Pin_FWD)
 
 %% Remove Paths
 rmpath("Complete 1976 Standard Atmosphere\")
