@@ -35,10 +35,6 @@ Payload_alt = 1000; % payload deployment altitude (ft) NOTE: Same as main
 delta_t = 0.1; % inflation time for parachutes
 deployment_v = 23.3; % velocity at drogue deployment, taken from OpenRocket
 
-% Volume
-AFTV = 622.04 /61020; % volume of AFT body tube in^3
-FWDV = 565.49 /61020; % volume of forward body tube in^3
-t_burn = 3; % pressure equalization time
 %% Calculations 
 
 %%% Get Densities
@@ -47,7 +43,6 @@ Drogue_alt = Launch_alt + Drogue_alt; % get actual alitude above sea level
 Drogue_alt = convlength(Drogue_alt,'ft','km'); % convert altitude to km
 [Z_drogue, Z_L_drogue, Z_U_drogue, T_drogue, P_drogue, rho_drogue,c_drogue, g_drogue, mu_drogue, nu_drogue, k_drogue, n_drogue, n_sum_drogue] = atmo(Drogue_alt,0.1,1);
 rho_drogue = rho_drogue(end);
-P_drogue = P_drogue(end);
 % Determine altitude density for payload deployment
 Payload_alt = Payload_alt + Launch_alt; % get actual altitude above sea level 
 Payload_alt = convlength(Payload_alt,'ft','km'); % convert altitude to km
@@ -83,17 +78,6 @@ Pin_AFT = F/40; % number of shear pins;
 F_FWD = convforce(Payload_W,'N','lbf')*6^2*pi/4;
 Pin_FWD = F_FWD/40; % shear pins for nose cone
 
-% Pressure Relief Holes
-% Determine density AGL
-% Launch_alt = convlength(Launch_alt,'ft','km');
-% [Z_AGL, Z_L_AGL, Z_U_AGL, T_AGL, P_AGL, rho_AGL,c_AGL, g_AGL, mu_AGL, nu_AGL, k_AGL, n_AGL, n_sum_AGL] = atmo(Launch_alt,0.1,1);
-% 
-% rho_AGL = rho_AGL(end);
-% P_AGL = P_AGL(end);
-% 
-% A_FWD = FWDV*(rho_AGL-rho_drogue)/(t_burn*0.77*sqrt(2*rho_AGL*(P_drogue-P_AGL)));
-% A_AFT = AFTV*(rho_AGL-rho_drogue)/(t_burn*0.77*sqrt(2*rho_AGL*(P_drogue-P_AGL)));
-
 %% Print Statement
 disp("---Descent Rate---")
 fprintf("The descent under drogue is %1.2f (m/s) or %1.2f (ft/s)\n",V_Drogue, convvel(V_Drogue,'m/s','ft/s'));
@@ -106,9 +90,6 @@ fprintf("The average snatch force for Payload is %1.2f (N)\n",F_avg_payload);
 disp("---Separations---")
 fprintf("The drag separation is %1.2f (lbs) or %1.2f (N) and %1f pins are needed\n", F, convforce(F, 'lbf', 'N'), Pin_AFT)
 fprintf("The minimum number of shear pins in the forward body tube is %1f\n",Pin_FWD)
-disp("---Vent Holes---")
-% fprintf("The AFT vent hole should be %1.2 (m) or %1.2(in)\n",A_AFT,convlength(A_AFT,'m','in'));
-% fprintf("The FWD vent hole should be %1.2 (m) or %1.2(in)\n",A_FWD,convlength(A_FWD,'m','in'));
 
 %% Remove Paths
 rmpath("Complete 1976 Standard Atmosphere\")
