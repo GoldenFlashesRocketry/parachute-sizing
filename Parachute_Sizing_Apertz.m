@@ -22,8 +22,8 @@ main_Cd = 2.2;
 payload_Cd = 1.2;
 
 % Rocket
-Rocket_W = 60; % rocket weight (lbs)
-Payload_W = 7; % payload weight (lbs)
+Rocket_W = 50.7; % rocket weight (lbs)
+Payload_W = 7.5; % payload weight (lbs)
 
 % Deployment
 Launch_alt = 2920;%4600; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report
