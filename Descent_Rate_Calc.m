@@ -70,10 +70,13 @@ F_avg_main = a_avg_main*(Rocket_Main/9.81)+Rocket_Main;
 a_avg_payload = (v_payload - 0)/delta_t;
 F_avg_payload = a_avg_payload*(Payload_W/9.81)+Payload_W;
 
-% Pressure AGL
-P_AGL = convpres(P_drogue(1),'Pa','psi');
+% Shear Pin Calculation
+%Get P_AGL
+ALT_AGL = convlength(Launch_alt,'ft','km');
+[Z_AGL, Z_L_AGL, Z_U_AGL, T_AGL, P_AGL, rho_AGL,c_AGL, g_AGL, mu_AGL, nu_AGL, k_AGL, n_AGL, n_sum_AGL] = atmo(ALT_AGL,0.1,1);
+P_AGL = convpres(P_AGL(end),'Pa','psi');
 P_AGL10K = convpres(P_drogue(end),'Pa','psi');
-F = (P_AGL-P_AGL10K)*6; % pressure on nose cone during flight
+F = (P_AGL-P_AGL10K)*6^2*pi/4; % pressure on nose cone during flight
 Pin_AFT = F/40; % number of shear pins;
 F_FWD = convforce(Payload_W,'N','lbf')*6^2*pi/4;
 Pin_FWD = F_FWD/40; % shear pins for nose cone
