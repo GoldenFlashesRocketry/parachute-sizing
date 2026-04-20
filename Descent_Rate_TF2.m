@@ -1,5 +1,3 @@
-%% Descent Rate for Test Flight 2
-
 clc;
 clear;
 close all;

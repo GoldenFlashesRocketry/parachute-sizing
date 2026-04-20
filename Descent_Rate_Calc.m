@@ -29,7 +29,7 @@ Rocket_W = 50.7; % rocket weight (lbs) (from OpenRocket PR2)
 Payload_W = 7.5; % payload weight (lbs)
 
 % Deployment
-Launch_alt = 2930; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report (1100 ft for mid ohio) (2930 for IREC)
+Launch_alt = 1100; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report (1100 ft for mid ohio) (2930 for IREC)
 Drogue_alt = 10000; % drogue deployment altitude (ft)
 Payload_alt = 1000; % payload deployment altitude (ft) NOTE: Same as main 
 delta_t = 0.1; % inflation time for parachutes
@@ -55,8 +55,8 @@ Payload_W = convforce(Payload_W, 'lbf', 'N');
 drogue_D = convlength(drogue_D,'ft','m');
 main_D = convlength(main_D,'ft','m');
 payload_D = convlength(payload_D,'ft','m');
-V_Drogue = sqrt((8*Rocket_Drogue)/(drogue_Cd*rho_drogue*pi*drogue_D^2));
-V_Main = sqrt((8*(Rocket_Drogue-Payload_W))/(main_Cd*rho_payload*pi*main_D^2));
+V_Drogue = sqrt((8*(Rocket_Drogue+Payload_W))/(drogue_Cd*rho_drogue*pi*drogue_D^2));
+V_Main = sqrt((8*Rocket_Drogue)/(main_Cd*rho_payload*pi*main_D^2));
 v_payload = sqrt((8*Payload_W)/(payload_Cd*rho_payload*pi*payload_D^2));
 
 % Snatch Forces on Drogue
