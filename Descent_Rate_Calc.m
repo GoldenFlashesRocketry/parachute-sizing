@@ -29,7 +29,7 @@ Rocket_W = 50.7; % rocket weight (lbs) (from OpenRocket PR2)
 Payload_W = 7.5; % payload weight (lbs)
 
 % Deployment
-Launch_alt = 2920;%4600; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report
+Launch_alt = 2930; % altitude of launch site, given from IREC 6.3.2 Testing and Verification Report (1100 ft for mid ohio) (2930 for IREC)
 Drogue_alt = 10000; % drogue deployment altitude (ft)
 Payload_alt = 1000; % payload deployment altitude (ft) NOTE: Same as main 
 delta_t = 0.1; % inflation time for parachutes
@@ -77,7 +77,7 @@ ALT_AGL = convlength(Launch_alt,'ft','km');
 P_AGL = convpres(P_AGL(end),'Pa','psi');
 P_AGL10K = convpres(P_drogue(end),'Pa','psi');
 F = (P_AGL-P_AGL10K)*6^2*pi/4; % pressure on nose cone during flight
-Pin_AFT = F/40; % number of shear pins;
+Pin_AFT = F/40; % number of shear pins; however I don't think this is right.
 F_FWD = convforce(Payload_W,'N','lbf')*6^2*pi/4;
 Pin_FWD = F_FWD/40; % shear pins for nose cone
 
